@@ -1,0 +1,27 @@
+version: '3'
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: zookeeper:3.5
+    ports:
+      - "2181:2181"
+
+  broker1:
+    container_name: broker1
+    image: kafka_node:v1.0
+    hostname: broker1
+    ports:
+      - "9062:9062"
+    tty: true
+    links:
+      - zookeeper
+
+  broker2:
+    container_name: broker2
+    image: kafka_node:v1.0
+    hostname: broker2
+    ports:
+      - "9072:9072"
+    tty: true
+    links:
+      - zookeeper
